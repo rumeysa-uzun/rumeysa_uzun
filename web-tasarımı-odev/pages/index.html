@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <link rel="icon" href="../images/rumeysascrochetstore.jpg">
+    <link rel="stylesheet" href="../styles/styles.css"> 
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"> 
+                <img src="../images/rumeysascrochetstore.jpg" alt="Logo" class="logo-img">
+                <h2 class="logo-text">Rümeysa's Crochet Store</h2>
+               
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+                <span ></span>
+                <span ></span>
+                <span ></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active">Ana Sayfa</a></li>
+                <li><a href="urunler.html">Ürünler</a></li>
+                <li><a href="sepet.html">Sepetim</a></li>
+                <li><a href="iletisim.html">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Hoş Geldiniz!</h1>
+            <p>Kaliteli el emeği ürünlerimizi inceleyin.</p>
+            <a href="urunler.html" class="btn">Alışverişe Başla!</a>
+        </section>
+   
+</main>
+
+
+    <section class="ozel-siparis-hero">
+        <div class="ozel-siparis-icerik">
+        <h2>Özel Siparişler</h2>
+        <p>Sadece size özel siparişler için bize ulaşabilirsiniz.</p>
+        <p>Detaylı bilgi için <a href="iletisim.html">İletişim</a> sayfasını ziyaret edin.</p>
+    </div>
+    </section>
+<main class="container">
+    <section class="cark-section">
+        <h2>Şans çarkını çevir, İndirimi Yakala!</h2>
+        <div class="cark-wrapper">
+         <div id="cark" class="cark-tasarim">
+              <div class="dilim d1"><span>%10 <br>İndirim</span></div>
+             <div class="dilim d2"><span>Kargo <br> Bedava</span></div>
+             <div class="dilim d3"><span>%20<br> İndirim</span></div>
+             <div class="dilim d4"><span>Pas</span></div>
+          </div>
+        
+        <button id="cark-btn" onclick="window.carkicevir()">Çevir</button>
+    </div>
+        <p id="cark-sonuc"></p>
+    </section>  
+</main>
+    
+   
+    <footer>
+        <p>&copy; 2026 Örgü Mağazam. Tüm hakları saklıdır.</p>
+    </footer>
+    <script src="../scripts/myscripts.js"></script>
+
+</body>
+</html>
