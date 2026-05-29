@@ -657,7 +657,7 @@ footer {
         margin-top: 110px !important;
     }
     .detay-img {
-        height: 280px; /* Mobilde resim biraz küçülür, ekranı kaplamaz */
+        height: 280px;
     }
 }
 @media (max-width:768px) {
