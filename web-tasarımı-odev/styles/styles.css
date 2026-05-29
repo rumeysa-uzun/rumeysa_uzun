@@ -664,5 +664,12 @@ footer {
     .sepet-tablo-container {
         overflow-x: auto;
         width: 100%;
+        padding: 10px;
+    }
+    .sepet-toplam-kart {
+        max-width: 100%;
+        margin: 20px 0 0 0;
+        width: 100%;
+        padding: 15px;
     }
 }
