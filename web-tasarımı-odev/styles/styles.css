@@ -661,15 +661,31 @@ footer {
     }
 }
 @media (max-width:768px) {
+    .container{
+        width: 100%;
+        padding: 0 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+
+    }
     .sepet-tablo-container {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
         overflow-x: auto;
         width: 100%;
         padding: 10px;
+        box-sizing: border-box;
     }
     .sepet-toplam-kart {
         max-width: 100%;
         margin: 20px 0 0 0;
         width: 100%;
         padding: 15px;
+        box-sizing: border-box;
+    }
+    .sepet-tablo{
+        width: 100%;
+        min-width: 400px;
     }
 }
