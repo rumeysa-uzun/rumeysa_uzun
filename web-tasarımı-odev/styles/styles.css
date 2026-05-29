@@ -660,3 +660,9 @@ footer {
         height: 280px; /* Mobilde resim biraz küçülür, ekranı kaplamaz */
     }
 }
+@media (max-width:768px) {
+    .sept-tablo-container {
+        overflow-x: auto;
+        width: 100%;
+    }
+}
