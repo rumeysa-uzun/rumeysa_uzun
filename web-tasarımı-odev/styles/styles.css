@@ -689,3 +689,81 @@ footer {
         min-width: 400px;
     }
 }
+.kupon-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.kupon-etiket {
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.kupon-grup {
+    display: flex;
+    gap: 10px;
+}
+
+.kupon-girdi {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ffe6e6;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+.kupon-btn {
+    background: #ff8b8b;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background 0.3s ease;
+}
+
+.kupon-btn:hover {
+    background: #ff6b6b;
+}
+
+#kupon-mesaj {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+.fiyat-detay-listesi {
+    text-align: left;
+    font-size: 15px;
+    color: #555;
+    line-height: 2;
+}
+.fiyat-satir {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.fiyat-satir span {
+    font-weight: bold;
+}
+.sepet-ayrac {
+    border: 0;
+    height: 1px;
+    background: #ffe6e6;
+    margin: 10px 0;
+}
+.genel-toplam-baslik {
+    font-size: 20px;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.genel-toplam-baslik span {
+    color: #ff8b8b;
+}

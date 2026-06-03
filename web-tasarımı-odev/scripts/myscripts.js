@@ -132,24 +132,32 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem("sepet", JSON.stringify(sepet));
             alert(`${secilenUrun.ad} sepete eklendi!`);
         };
-    
+    const sepetTabloGövde = document.getElementById("sepetTabloGövde");
+    const araToplamAlani = document.getElementById("araToplam");
+    const kargoAlani = document.getElementById("kargoUcreti");
+    const indirimSatiri = document.getElementById("indirimSatiri");
+    const indirimAlani = document.getElementById("indirimTutari");
+    const toplamFiyatAlani = document.getElementById("toplamFiyat");
 
-    const sepetTabloGövde=document.getElementById("sepetTabloGövde");
-    const toplamFiyatAlani=document.getElementById("toplamFiyat");
-    if (sepetTabloGövde ) {
-        window.sepetiListele=function() {
+    if (typeof window.aktifIndirimOrani === "undefined") window.aktifIndirimOrani = 0;
+    if (typeof window.bedavaKargoMu === "undefined") window.bedavaKargoMu = false;
+    if (sepetTabloGövde) {
+        window.sepetiListele = function() {
             let sepet = JSON.parse(localStorage.getItem("sepet")) || [];
             sepetTabloGövde.innerHTML = "";
-            let genelToplam = 0;
-            let toplamFiyat = 0;
+            let araToplam = 0;
             if (sepet.length === 0) {
-                sepetTabloGövde.innerHTML = "<tr><td colspan='5'>Sepetiniz boş.</td></tr>";
-                if (toplamFiyatAlani) {toplamFiyatAlani.innerText = "Toplam: 0 TL";}
+                sepetTabloGövde.innerHTML = "<tr><td colspan='6' style='text-align:center; padding:20px; color:#888;'>Sepetiniz boş.</td></tr>";
+                if (araToplamAlani) araToplamAlani.innerText = "0 TL";
+                if (kargoAlani) kargoAlani.innerText = "0 TL";
+                if (toplamFiyatAlani) toplamFiyatAlani.innerText = "0 TL";
+                if (indirimSatiri) indirimSatiri.style.display = "none";
                 return;
             }
             sepet.forEach(urun => {
                 const urunToplam = urun.fiyat * urun.adet;
-                genelToplam += urunToplam;
+                araToplam += urunToplam;
+
                 const satir = document.createElement("tr");
                 satir.innerHTML = `
                     <td><img src="${urun.gorsel}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"></td>
@@ -161,20 +169,64 @@ document.addEventListener("DOMContentLoaded", function() {
                 `;
                 sepetTabloGövde.appendChild(satir);
             });
-            if (toplamFiyatAlani) toplamFiyatAlani.innerText = genelToplam+` TL`;
-        
+            let kargoUcreti = (araToplam >= 500 || window.bedavaKargoMu) ? 0 : 30; 
+            let indirimTutari = araToplam * window.aktifIndirimOrani;
+            let genelToplam = araToplam + kargoUcreti - indirimTutari;
+
+            if (araToplamAlani) araToplamAlani.innerText = araToplam + " TL";
+            if (kargoAlani) kargoAlani.innerText = kargoUcreti === 0 ? "Bedava" : kargoUcreti + " TL";
+            
+            if (indirimTutari > 0) {
+                if (indirimSatiri) indirimSatiri.style.display = "flex";
+                if (indirimAlani) indirimAlani.innerText = "-" + indirimTutari + " TL";
+            } else {
+                if (indirimSatiri) indirimSatiri.style.display = "none";
+            }
+            
+            if (toplamFiyatAlani) toplamFiyatAlani.innerText = genelToplam + " TL";
+        };
+        window.kuponUygula = function() {
+            const kod = document.getElementById("kuponKodu").value.trim().toUpperCase();
+            const mesajAlani = document.getElementById("kupon-mesaj");
+
+            if (!mesajAlani) return;
+
+            if (kod === "ILMEK10") {
+                window.aktifIndirimOrani = 0.10;
+                window.bedavaKargoMu = false;
+                mesajAlani.innerText = "%10 İndirim Uygulandı!";
+                mesajAlani.style.color = "#1dd1a1";
+            } else if (kod === "ILMEK20") {
+                window.aktifIndirimOrani = 0.20;
+                window.bedavaKargoMu = false;
+                mesajAlani.innerText = "%20 İndirim Uygulandı!";
+                mesajAlani.style.color = "#1dd1a1";
+            } else if (kod === "BDVKARGO") {
+                window.aktifIndirimOrani = 0;
+                window.bedavaKargoMu = true;
+                mesajAlani.innerText = "Kargo Ücretsiz Yapıldı!";
+                mesajAlani.style.color = "#1dd1a1";
+            } else {
+                window.aktifIndirimOrani = 0;
+                window.bedavaKargoMu = false;
+                mesajAlani.innerText = " Geçersiz Kupon Kodu!";
+                mesajAlani.style.color = "#ff6b6b";
+            }
+            window.sepetiListele(); // İndirimli fiyatları listeye yansıt
         };
         window.sepettenSil = function(urunId) {
             let sepet = JSON.parse(localStorage.getItem("sepet")) || [];
             sepet = sepet.filter(item => item.id !== urunId);
             localStorage.setItem("sepet", JSON.stringify(sepet));
-            sepetiListele(); 
+            window.sepetiListele(); 
         };
-        window.sepetiBosalt=function() {
-        alert("Siparişiniz başarıyla tamamlandı! Alışverişiniz için teşekkür ederiz.");
-        localStorage.removeItem("sepet");
-         sepetiListele();
+        window.sepetiBosalt = function() {
+            alert("Siparişiniz başarıyla tamamlandı! Alışverişiniz için teşekkür ederiz.");
+            localStorage.removeItem("sepet");
+            window.aktifIndirimOrani = 0;
+            window.bedavaKargoMu = false;
+            window.sepetiListele();
         };
-        sepetiListele();
+        window.sepetiListele();
     }
 });

@@ -50,12 +50,31 @@
                     </tr>
                 </thead>
                 <tbody id="sepetTabloGövde">
-                    </tbody>
+                    <tr>
+                        <td colspan="6">Sepetinizde ürün bulunmamaktadır.</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
         <div class="sepet-toplam-kart">
-            <h3>Genel Toplam: <span id="toplamFiyat">0 TL</span></h3>
+            <div class="kupon-container">
+                <label for="kuponKodu" class="kupon-etiket">Kupon Kodu:</label>
+                <div class="kupon-grup">
+                    <input type="text" id="kuponKodu" placeholder="Örn: ILMEK10" class="kupon-girdi">
+                    <button onclick="kuponUygula()" class="kupon-btn">Uygula</button>
+                </div>
+                <div id="kupon-mesaj"></div>
+            </div>
+
+            <div class="fiyat-detay-listesi">
+                <div class="fiyat-satir">Ara Toplam: <span id="araToplam">0 TL</span></div>
+                <div class="fiyat-satir">Kargo Ücreti: <span id="kargoUcreti">30 TL</span></div>
+                <div id="indirimSatiri" class="fiyat-satir indirim-vurgu">İndirim: <span id="indirimTutari">-0 TL</span></div>
+                <hr class="sepet-ayrac">
+                <h3 class="genel-toplam-baslik">Genel Toplam: <span id="toplamFiyat">0 TL</span></h3>
+            </div>
+
             <button class="tamamla-btn" onclick="sepetiBosalt()">Alışverişi Tamamla</button>
         </div>
 
